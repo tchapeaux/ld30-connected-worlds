@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+            "name": "ld30",
+			"follow_symlinks": true,
+			"path": "."
+		}
+	]
+}

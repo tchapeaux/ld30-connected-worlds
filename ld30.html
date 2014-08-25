@@ -1,0 +1,103 @@
+<!doctype html>
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <!-- <link rel=icon href="img/favicon.png"> -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="img/favicon_apple.png"> -->
+    <title>ld30</title>
+</head>
+
+
+<body>
+
+<div id="inputPanel" class="bordered">
+    <form id="inputForm">
+    <!-- input fields generated dynamically -->
+    </form>
+    <!-- <br/><button id="randomButton" onclick="randomizeInput(inputs);">Randomize</button> -->
+</div>
+
+<script type="text/javascript">
+    "use strict";
+
+    // create input grid
+    var inputs = [];
+    var input_width = 5;
+    var input_height = 4;
+
+    function randomizeInput(inputs) {
+        for (var h = 0; h < inputs.length; h++) {
+            for (var w = 0; w < inputs[h].length; w++) {
+                var input = inputs[h][w];
+                input.checked = Math.random() < 0.5;
+            }
+        }
+    }
+
+    for (var h = 0; h < input_height; h++) {
+        // new row of input
+        inputs.push([]);
+        for (var w = 0; w < input_width; w++) {
+            var input = document.createElement("input");
+            input.type = "checkbox";
+            input.id = "input-" + w + "x" + h;
+            inputForm.appendChild(input);
+            inputs[h].push(input);
+        }
+        inputForm.appendChild(document.createElement("br"));
+    }
+
+    randomizeInput(inputs);
+</script>
+
+<div id="gameArea">
+    <canvas id="world_labyrinth" width ="800" height="400"></canvas>
+    <script type="text/javascript" src="world_labyrinth.js"></script>
+    <canvas id="world_saws" width ="800" height="400"></canvas>
+    <script type="text/javascript" src="world_saws.js"></script>
+
+    <canvas id="world_green" width ="800" height="400"></canvas>
+    <script type="text/javascript" src="world_green.js"></script>
+    <canvas id="world_blue" width ="800" height="400"></canvas>
+    <script type="text/javascript" src="world_blue.js"></script>
+
+
+
+    <script type="text/javascript">
+    world_labyrinth.init(inputs);
+    world_saws.init(inputs);
+    world_blue.init(inputs);
+    world_green.init(inputs);
+
+    window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.oRequestAnimationFrame;
+
+    var oldTimestamp = 0;
+    function step(timestamp) {
+        var dt = timestamp - oldTimestamp;
+        world_labyrinth.update(dt, inputs);
+        world_saws.update(dt, inputs);
+        world_blue.update(dt, inputs);
+        world_green.update(dt, inputs);
+
+        world_labyrinth.draw();
+        world_saws.draw();
+        world_blue.draw();
+        world_green.draw();
+
+        requestAnimationFrame(step);
+        oldTimestamp = timestamp;
+    }
+
+    requestAnimationFrame(step);
+    </script>
+</div>
+
+<div id="footer">
+<h1>Universal Remote</h1>
+
+<p>A thing by Altom for Ludum Dare 30 (Theme: "Connected Words")</p>
+</div>
+
+</body>

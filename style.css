@@ -1,0 +1,68 @@
+body {
+    text-align: center;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+h1 {
+    font-family: "Open Sans", serif;
+    font-size: 50pt;
+    margin: 0px;
+}
+
+.bordered {
+    border: 2px solid white;
+    border-radius: 30px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#inputPanel {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#inputPanel input {
+    margin: 10px;
+}
+
+#inputPanel input:checked{
+    /*box-shadow: 1px 1px 0px white;*/
+}
+
+
+#gameArea {
+    margin-left: auto;
+
+}
+
+#world_labyrinth {
+    background: white;
+    width: 45%;
+}
+
+#world_saws {
+    background: Tomato;
+    width: 45%;
+}
+
+#world_blue {
+    background: RoyalBlue;
+    width: 45%;
+}
+
+#world_green {
+    background: ForestGreen;
+    width: 45%;
+}
+
+
+#footer {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
